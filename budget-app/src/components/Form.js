@@ -1,18 +1,6 @@
-import React, { useState, useEffect } from 'react'
 import { Form, Button } from 'semantic-ui-react'
-import { finances } from '../finances'
 
 function MainForm() {
-    const copiedFinances = finances
-    console.log(copiedFinances)
-
-    const [currentState, updateState] = useState([])
-    useEffect(() => {
-        updateState(finances)
-        console.log(finances)
-    }, [finances])
-
-
 
     return (
         <Form unstackable>
