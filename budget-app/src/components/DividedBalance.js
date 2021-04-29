@@ -1,7 +1,7 @@
 import React from 'react'
 import { Grid, Segment, Statistic, StatisticLabel, StatisticValue } from 'semantic-ui-react'
 
-function DividedBalance() {
+function DividedBalance(props) {
     return (
         <Segment textAlign="center">
             <Grid columns={2} divided>
@@ -11,7 +11,7 @@ function DividedBalance() {
                             <StatisticLabel style={{ textAlign: "left" }}>
                                 Income:
                 </StatisticLabel>
-                            <StatisticValue>$3200</StatisticValue>
+                            <StatisticValue>{props.data('green')}</StatisticValue>
                         </Statistic>
                     </Grid.Column>
                     <Grid.Column>
@@ -19,7 +19,7 @@ function DividedBalance() {
                             <StatisticLabel style={{ textAlign: "right" }}>
                                 Expenses:
                 </StatisticLabel>
-                            <StatisticValue>$700</StatisticValue>
+                            <StatisticValue>{props.data('red')}</StatisticValue>
                         </Statistic>
                     </Grid.Column>
                 </Grid.Row>
