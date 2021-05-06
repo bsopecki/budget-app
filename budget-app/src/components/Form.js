@@ -6,15 +6,14 @@ function MainForm({ onAdd }) {
     const [description, setDescription] = useState('')
     const [amount, setAmount] = useState('')
     const [category, setCategory] = useState('')
-    const [status, setStatus] = useState('')
+    const [status, setStatus] = useState('green')
 
     const onSubmit = (e) => {
         e.preventDefault()
         onAdd({ amount, category, description, status })
         cancelHandler()
     }
-    const cancelHandler = (e) => {
-        e.preventDefault()
+    const cancelHandler = () => {
         setDescription('')
         setAmount('')
         setCategory('')
@@ -25,7 +24,7 @@ function MainForm({ onAdd }) {
             <Form.Group>
                 <Form.Input onChange={(e) => { setDescription(e.target.value) }} icon='tags' width={10} label='description' value={description} placeholder="New shiny things"></Form.Input>
                 <Form.Input onChange={(e) => { setCategory(e.target.value) }} icon='info' iconPosition='left' width={3} label='value' value={category} placeholder="for"></Form.Input>
-                <Form.Input onChange={(e) => { setAmount(e.target.value) }} icon='dollar' iconPosition='left' width={3} label='value' value={amount} placeholder="100"></Form.Input>
+                <Form.Input onChange={(e) => { setAmount(parseInt(e.target.value)) }} icon='dollar' iconPosition='left' width={3} label='value' value={amount} placeholder="100"></Form.Input>
             </Form.Group>
             <select value={status} onChange={(e) => { setStatus(e.target.value) }}>
                 <option value='green'>Income</option>
