@@ -22,9 +22,38 @@ function MainForm({ onAdd }) {
     return (
         <Form unstackable onSubmit={onSubmit}>
             <Form.Group>
-                <Form.Input onChange={(e) => { setDescription(e.target.value) }} icon='tags' width={10} label='description' value={description} placeholder="New shiny things"></Form.Input>
-                <Form.Input onChange={(e) => { setCategory(e.target.value) }} icon='info' iconPosition='left' width={3} label='value' value={category} placeholder="for"></Form.Input>
-                <Form.Input onChange={(e) => { setAmount(parseInt(e.target.value)) }} icon='dollar' iconPosition='left' width={3} label='value' value={amount} placeholder="100"></Form.Input>
+                <Form.Input
+                    required
+                    onChange={(e) => { setDescription(e.target.value) }}
+                    icon='tags'
+                    width={10}
+                    label='description'
+                    value={description} placeholder="New shiny things"
+                    error={'Please enter the name of item'}>
+
+                </Form.Input>
+                <Form.Input
+                    required
+                    onChange={(e) => { setCategory(e.target.value) }}
+                    icon='info'
+                    iconPosition='left'
+                    width={3}
+                    label='value'
+                    value={category}
+                    placeholder="for"
+                    error={'Please enter category'}></Form.Input>
+                <Form.Input
+                    type='number'
+                    required
+                    onChange={(e) => { setAmount(parseInt(e.target.value)) }}
+                    icon='dollar'
+                    iconPosition='left'
+                    width={3}
+                    label='value'
+                    value={amount}
+                    placeholder="100"
+                    error={'Please enter amount'}
+                ></Form.Input>
             </Form.Group>
             <select value={status} onChange={(e) => { setStatus(e.target.value) }}>
                 <option value='green'>Income</option>
