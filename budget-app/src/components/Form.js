@@ -30,7 +30,6 @@ function MainForm({ onAdd }) {
                     label='description'
                     value={description} placeholder="New shiny things"
                     error={'Please enter the name of item'}>
-
                 </Form.Input>
                 <Form.Input
                     required

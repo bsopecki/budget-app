@@ -17,7 +17,7 @@ const App = () => {
 
   //Add record
   const addFinanceRecord = (financeRecord) => {
-    const id = Math.floor(Math.random() * 30) + 1
+    const id = records.length + 1;
     const newFinanceRecord = { id, ...financeRecord }
     setNewRecord([...records, newFinanceRecord])
   }
