@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react'
-import { Link, useHistory } from 'react-router-dom'
+import { Button, Form, Grid, Header, Segment } from 'semantic-ui-react'
+import { useHistory } from 'react-router-dom'
 
 const LoginForm = ({ loginHandler }) => {
     const [userEmail, setUserEmail] = useState('')
@@ -47,9 +47,6 @@ const LoginForm = ({ loginHandler }) => {
                     </Button>
                     </Segment>
                 </Form>
-                <Message>
-                    New to us? <Link to='/register'>Register</Link>
-                </Message>
             </Grid.Column>
         </Grid>
     )

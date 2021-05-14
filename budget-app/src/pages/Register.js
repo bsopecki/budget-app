@@ -1,30 +1,46 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Button, Form, Grid, Header, Segment } from 'semantic-ui-react'
+import { validation } from '../validation'
 
 const Register = ({ onAdd }) => {
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [confirmedPassword, setConfirmedPassword] = useState('')
+
+    const [userData, setUserData] = useState({
+        name: '',
+        email: '',
+        password: '',
+        confirmedPassword: ''
+    })
+
+    const [errors, setErrors] = useState({
+        name: 'Name',
+        email: 'e-mail',
+        password: 'Password',
+        confirmedPassword: 'Confirm password',
+        bool: false
+    })
+
     let history = useHistory()
 
     const registerMemberHandler = (e) => {
         e.preventDefault()
-        onAdd({ name, email, password })
         clearForm()
         redirectHandler()
+        setErrors(validation(userData))
+        console.log(userData)
     }
 
     const redirectHandler = () => {
-        history.push('/')
+        history.push('/login')
     }
 
     const clearForm = () => {
-        setName('')
-        setEmail('')
-        setPassword('')
-        setConfirmedPassword('')
+        setUserData({
+            name: '',
+            email: '',
+            password: '',
+            confirmedPassword: ''
+        })
     }
 
     return (
@@ -35,10 +51,38 @@ const Register = ({ onAdd }) => {
             </Header>
                 <Form size='large' onSubmit={registerMemberHandler}>
                     <Segment stacked>
-                        <Form.Input fluid placeholder='Name' type='text' value={name} onChange={(e) => setName(e.target.value)} />
-                        <Form.Input fluid placeholder='e-mail' type='text' value={email} onChange={(e) => setEmail(e.target.value)} />
-                        <Form.Input fluid placeholder='Password' type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
-                        <Form.Input fluid placeholder='Confirm password' type='password' value={confirmedPassword} onChange={(e) => setConfirmedPassword(e.target.value)} />
+                        <Form.Input
+                            fluid
+                            placeholder={errors.name}
+                            type='text'
+                            value={userData.name}
+                            onChange={(e) => setUserData({ ...userData, name: e.target.value })}
+                            error={errors.bool}
+                        />
+                        <Form.Input
+                            fluid
+                            placeholder={errors.email}
+                            type='text'
+                            value={userData.email}
+                            onChange={(e) => setUserData({ ...userData, email: e.target.value })}
+                            error={errors.bool}
+                        />
+                        <Form.Input
+                            fluid
+                            placeholder={errors.password}
+                            type='password'
+                            value={userData.password}
+                            onChange={(e) => setUserData({ ...userData, password: e.target.value })}
+                            error={errors.bool}
+                        />
+                        <Form.Input
+                            fluid
+                            placeholder={errors.confirmedPassword}
+                            type='password'
+                            value={userData.confirmedPassword}
+                            onChange={(e) => setUserData({ ...userData, confirmedPassword: e.target.value })}
+                            error={errors.bool}
+                        />
                         <Button color='teal' fluid size='large'>
                             Create account
                         </Button>

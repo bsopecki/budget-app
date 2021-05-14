@@ -29,9 +29,9 @@ const App = () => {
     <div>
       <Router>
         <Switch>
-          <Route path='/' exact component={() => <Login loginHandler={checkUser} />} />
+          <Route path='/' exact component={() => <Register loginHandler={setNewUser} />} />
           <Route path='/budget' component={() => <BudgetPage />} />
-          <Route path='/register' component={() => <Register onAdd={setNewUser} />} />
+          <Route path='/login' component={() => <Login onAdd={checkUser} />} />
         </Switch>
       </Router>
     </div>
