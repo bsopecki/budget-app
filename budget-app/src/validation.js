@@ -11,17 +11,12 @@ export const validation = (values) => {
         errors.email = 'Email is required'
     } else if (!/\S+@\S+\.\S+/.test(values.email)) {
         errors.bool = true;
-        errors.email = 'Email is required'
+        errors.email = 'Email is invalid'
     }
 
     if (!values.password) {
         errors.bool = true;
         errors.password = 'Password is required'
-    }
-
-    if (values.confirmedPasword !== values.password) {
-        errors.bool = true;
-        errors.confirmedPasword = 'Password must be the same'
     }
 
     return errors
