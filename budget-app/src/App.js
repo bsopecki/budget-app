@@ -8,18 +8,19 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 const App = () => {
   const [users, setUser] = useState([])
   const [loggedUser, setLoggedUser] = useState(users)
-
+  console.log(users)
 
   const setNewUser = (newUser) => {
     const setedUser = { ...newUser }
     setUser([...users, setedUser])
+    console.log(setedUser)
   }
 
   const checkUser = (user) => {
     const userHandler = { ...user }
     setLoggedUser({ ...loggedUser, userHandler })
     users.forEach(element => {
-      if (element.email === user.userEmail && element.password === user.userPassword) {
+      if (element.email === user.login && element.password === user.password) {
         console.log('ok')
       }
     });
@@ -29,9 +30,9 @@ const App = () => {
     <div>
       <Router>
         <Switch>
-          <Route path='/' exact component={() => <Register loginHandler={setNewUser} />} />
+          <Route path='/' exact component={() => <Register onAdd={setNewUser} />} />
           <Route path='/budget' component={() => <BudgetPage />} />
-          <Route path='/login' component={() => <Login onAdd={checkUser} />} />
+          <Route path='/login' component={() => <Login loginHandler={checkUser} />} />
         </Switch>
       </Router>
     </div>

@@ -3,13 +3,15 @@ import { Button, Form, Grid, Header, Segment } from 'semantic-ui-react'
 import { useHistory } from 'react-router-dom'
 
 const LoginForm = ({ loginHandler }) => {
-    const [userEmail, setUserEmail] = useState('')
-    const [userPassword, setUserPassword] = useState('')
+    const [loginData, setLoginData] = useState({
+        email: '',
+        password: ''
+    })
     let history = useHistory()
 
     const onSubmit = (e) => {
         e.preventDefault()
-        loginHandler({ userEmail, userPassword })
+        loginHandler({ ...loginData, login: loginData.login, password: loginData.password })
         accessHandler()
     }
 
@@ -30,8 +32,8 @@ const LoginForm = ({ loginHandler }) => {
                             iconPosition='left'
                             placeholder='E-mail address'
                             type='text'
-                            value={userEmail}
-                            onChange={(e) => setUserEmail(e.target.value)}
+                            value={loginData.email}
+                            onChange={(e) => setLoginData({ ...loginData, email: e.target.value })}
                         />
                         <Form.Input
                             fluid
@@ -39,8 +41,8 @@ const LoginForm = ({ loginHandler }) => {
                             iconPosition='left'
                             placeholder='Password'
                             type='password'
-                            value={userPassword}
-                            onChange={(e) => setUserPassword(e.target.value)}
+                            value={loginData.password}
+                            onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
                         />
                         <Button color='teal' fluid size='large'>
                             Login

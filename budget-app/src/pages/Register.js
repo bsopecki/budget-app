@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Button, Form, Grid, Header, Segment, Message } from 'semantic-ui-react'
-import { validation } from '../validation'
+import { validation } from '../registerFormValidation'
 
 const Register = ({ onAdd }) => {
 
@@ -21,15 +21,15 @@ const Register = ({ onAdd }) => {
         e.preventDefault()
         setErrors(validation(userData))
         setValidData(true)
-        onAdd({ ...userData, name: userData.name, email: userData.email, password: userData.password })
     }
 
     useEffect(() => {
         if (Object.keys(errors).length === 0 && validData) {
             clearForm()
+            onAdd({ name: userData.name, email: userData.email, password: userData.password })
             history.push('/login')
         }
-    }, [errors])
+    }, [errors, userData, history, onAdd, validData])
 
 
 
