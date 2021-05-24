@@ -13,7 +13,19 @@ import { finances } from '../finances'
 const BudgetPage = () => {
     const initialRecords = finances
     const [records, setNewRecord] = useState(initialRecords)
-    const amounts = (param) => records.filter(({ status }) => status === param).map(({ amount }) => amount).reduce((a, b) => a + b)
+    const amounts = (param) => {
+        const filteredRecords = records.filter(({ status }) => status === param).map(({ amount }) => amount)
+        let reducedRecords = 0
+        if (filteredRecords.length > 0) {
+            return filteredRecords.reduce((a, b) => a + b)
+        } else {
+            return reducedRecords
+        }
+
+    }
+    //  records.filter(({ status }) => status === param).map(({ amount }) => amount).reduce((a, b) => a + b)
+
+
     const mainBalance = amounts('green') - amounts('red')
 
     //Add record
@@ -22,6 +34,7 @@ const BudgetPage = () => {
         const newFinanceRecord = { id, ...financeRecord }
         setNewRecord([...records, newFinanceRecord])
     }
+
     //Delete record
     const deleteRecord = (id) => {
         setNewRecord(records.filter((record) => record.id !== id))
