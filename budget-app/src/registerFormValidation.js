@@ -9,6 +9,7 @@ export const validation = (values) => {
     if (!values.email) {
         errors.bool = true;
         errors.email = 'Email is required'
+
     } else if (!/\S+@\S+\.\S+/.test(values.email)) {
         errors.bool = true;
         errors.email = 'Email is invalid'
