@@ -45,9 +45,9 @@ const Register = ({ onAdd }) => {
     return (
         <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
             <Grid.Column style={{ maxWidth: 450 }}>
-                <Header as='h2' color='teal' textAlign='center'>
+                <Header as='h2' color='red' textAlign='center'>
                     Create account
-            </Header>
+                </Header>
                 <Form size='large' onSubmit={registerMemberHandler}>
                     <Segment stacked>
                         <Message>
