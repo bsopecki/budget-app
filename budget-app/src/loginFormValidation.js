@@ -5,6 +5,6 @@ const loginValidation = (values, outputs) => {
     }
 
     if (values.password !== outputs.password) {
-        errors.password = 'Invalid password'
+        errors.password = 'Invalid password. Try again'
     }
 }

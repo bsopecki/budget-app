@@ -3,7 +3,7 @@ import { Statistic, StatisticLabel, StatisticValue } from 'semantic-ui-react'
 
 function GeneralBalance(props) {
     let status
-    { if (props.balance < 0) { status = 'red' } status = 'green' }
+    { if (props.balance < 0) { status = 'red' } else status = 'green' }
     return (
         <Statistic size="small" color={status}>
             <StatisticLabel>Your Balance</StatisticLabel>

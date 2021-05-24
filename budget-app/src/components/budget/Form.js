@@ -6,7 +6,7 @@ function MainForm({ onAdd }) {
     const [description, setDescription] = useState('')
     const [amount, setAmount] = useState('')
     const [category, setCategory] = useState('')
-    const [status, setStatus] = useState('green')
+    const [status, setStatus] = useState('')
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -54,7 +54,8 @@ function MainForm({ onAdd }) {
                     error={'Please enter amount'}
                 ></Form.Input>
             </Form.Group>
-            <select value={status} onChange={(e) => { setStatus(e.target.value) }}>
+            <select value={status} required onChange={(e) => { setStatus(e.target.value) }}>
+                <option value="">Type of operation</option>
                 <option value='green'>Income</option>
                 <option value='red'>Expense</option>
             </select>
