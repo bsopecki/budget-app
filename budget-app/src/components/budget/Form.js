@@ -1,5 +1,5 @@
 import { Form, Button, Message } from 'semantic-ui-react'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { financeRecordValdation } from '../../validation'
 
 
@@ -11,24 +11,31 @@ function MainForm({ onAdd }) {
         status: ''
     })
     const [errors, setErrors] = useState({})
-    const [isValid, setIsValid] = useState(false)
+
+    const numberConverter = (value) => {
+        let num = parseFloat(value)
+        return num
+    }
 
 
     const onSubmit = (e) => {
         e.preventDefault()
-        setErrors(financeRecordValdation(newItem))
-        setIsValid(true)
+        if (Object.keys(financeRecordValdation(newItem)).length === 0) {
+            onAdd({
+                amount: newItem.amount,
+                category: newItem.category,
+                description: newItem.description,
+                status: newItem.status
+            });
+            cancelHandler(e)
+            setErrors({})
+        } else {
+            setErrors(financeRecordValdation(newItem))
+        }
     }
 
-
-    useEffect(() => {
-        if (Object.keys(errors).length === 0 && isValid) {
-            cancelHandler()
-            onAdd({ amount: newItem.amount, category: newItem.category, description: newItem.description, status: newItem.status })
-        }
-    }, [errors, isValid])
-
-    const cancelHandler = () => {
+    const cancelHandler = (e) => {
+        e.preventDefault()
         setNewItem({
             amount: '',
             category: '',
@@ -45,7 +52,8 @@ function MainForm({ onAdd }) {
                 icon='tags'
                 width={12}
                 label='description'
-                value={newItem.description} placeholder="New shiny things"
+                value={newItem.description}
+                placeholder="New shiny things"
                 error={errors.bool}>
             </Form.Input>
             {errors.category ? <Message>{errors.category}</Message> : ''}
@@ -62,8 +70,8 @@ function MainForm({ onAdd }) {
             </Form.Input>
             {errors.amount ? <Message>{errors.amount}</Message> : ''}
             <Form.Input
-                type='text'
-                onChange={(e) => { setNewItem({ ...newItem, amount: parseInt(e.target.value) }) }}
+                type='number'
+                onChange={(e) => { setNewItem({ ...newItem, amount: numberConverter(e.target.value) }) }}
                 icon='dollar'
                 iconPosition='left'
                 width={12}
