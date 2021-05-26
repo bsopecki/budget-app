@@ -15,15 +15,12 @@ const BudgetPage = () => {
     const [records, setNewRecord] = useState(initialRecords)
     const amounts = (param) => {
         const filteredRecords = records.filter(({ status }) => status === param).map(({ amount }) => amount)
-        let reducedRecords = 0
         if (filteredRecords.length > 0) {
             return filteredRecords.reduce((a, b) => a + b)
         } else {
-            return reducedRecords
+            return 0
         }
-
     }
-    //  records.filter(({ status }) => status === param).map(({ amount }) => amount).reduce((a, b) => a + b)
 
 
     const mainBalance = amounts('green') - amounts('red')

@@ -1,60 +1,79 @@
-import { Form, Button } from 'semantic-ui-react'
-import { useState } from 'react'
+import { Form, Button, Message } from 'semantic-ui-react'
+import { useState, useEffect } from 'react'
+import { financeRecordValdation } from '../../validation'
 
 
 function MainForm({ onAdd }) {
-    const [description, setDescription] = useState('')
-    const [amount, setAmount] = useState('')
-    const [category, setCategory] = useState('')
-    const [status, setStatus] = useState('')
+    const [newItem, setNewItem] = useState({
+        amount: '',
+        category: '',
+        description: '',
+        status: ''
+    })
+    const [errors, setErrors] = useState({})
+    const [isValid, setIsValid] = useState(false)
+
 
     const onSubmit = (e) => {
         e.preventDefault()
-        onAdd({ amount, category, description, status })
-        cancelHandler()
+        setErrors(financeRecordValdation(newItem))
+        setIsValid(true)
     }
+
+
+    useEffect(() => {
+        if (Object.keys(errors).length === 0 && isValid) {
+            cancelHandler()
+            onAdd({ amount: newItem.amount, category: newItem.category, description: newItem.description, status: newItem.status })
+        }
+    }, [errors, isValid])
+
     const cancelHandler = () => {
-        setDescription('')
-        setAmount('')
-        setCategory('')
-        setStatus('')
+        setNewItem({
+            amount: '',
+            category: '',
+            description: '',
+            status: ''
+        })
     }
     return (
         <Form unstackable onSubmit={onSubmit}>
-            <Form.Group>
-                <Form.Input
-                    required
-                    onChange={(e) => { setDescription(e.target.value) }}
-                    icon='tags'
-                    width={10}
-                    label='description'
-                    value={description} placeholder="New shiny things"
-                    error={'Please enter the name of item'}>
-                </Form.Input>
-                <Form.Input
-                    required
-                    onChange={(e) => { setCategory(e.target.value) }}
-                    icon='info'
-                    iconPosition='left'
-                    width={3}
-                    label='value'
-                    value={category}
-                    placeholder="for"
-                    error={'Please enter category'}></Form.Input>
-                <Form.Input
-                    type='number'
-                    required
-                    onChange={(e) => { setAmount(parseInt(e.target.value)) }}
-                    icon='dollar'
-                    iconPosition='left'
-                    width={3}
-                    label='value'
-                    value={amount}
-                    placeholder="100"
-                    error={'Please enter amount'}
-                ></Form.Input>
-            </Form.Group>
-            <select value={status} required onChange={(e) => { setStatus(e.target.value) }}>
+            {errors.description ? <Message>{errors.description}</Message> : ''}
+            <Form.Input
+                type='text'
+                onChange={(e) => { setNewItem({ ...newItem, description: e.target.value }) }}
+                icon='tags'
+                width={12}
+                label='description'
+                value={newItem.description} placeholder="New shiny things"
+                error={errors.bool}>
+            </Form.Input>
+            {errors.category ? <Message>{errors.category}</Message> : ''}
+            <Form.Input
+                type='text'
+                onChange={(e) => { setNewItem({ ...newItem, category: e.target.value }) }}
+                icon='info'
+                iconPosition='left'
+                width={12}
+                label='category'
+                value={newItem.category}
+                placeholder="for"
+                error={errors.bool}>
+            </Form.Input>
+            {errors.amount ? <Message>{errors.amount}</Message> : ''}
+            <Form.Input
+                type='text'
+                onChange={(e) => { setNewItem({ ...newItem, amount: parseInt(e.target.value) }) }}
+                icon='dollar'
+                iconPosition='left'
+                width={12}
+                label='amount'
+                value={newItem.amount}
+                placeholder="100"
+                error={errors.bool}
+            ></Form.Input>
+            {errors.status ? <Message>{errors.status}</Message> : ''}
+            <select value={newItem.status} onChange={(e) => { setNewItem({ ...newItem, status: e.target.value }) }}>
                 <option value="">Type of operation</option>
                 <option value='green'>Income</option>
                 <option value='red'>Expense</option>

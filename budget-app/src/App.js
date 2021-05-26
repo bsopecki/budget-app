@@ -6,24 +6,20 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 
 const App = () => {
-  const [users, setUser] = useState([])
-  const [loggedUser, setLoggedUser] = useState(users)
-  console.log(users)
+  const [user, setUser] = useState([])
+  const [loggedUser, setLoggedUser] = useState(user)
+  console.log(user)
 
   const setNewUser = (newUser) => {
     const setedUser = { ...newUser }
-    setUser([...users, setedUser])
+    setUser([...user, setedUser])
     console.log(setedUser)
   }
 
   const checkUser = (user) => {
     const userHandler = { ...user }
     setLoggedUser({ ...loggedUser, userHandler })
-    users.forEach(element => {
-      if (element.email === user.login && element.password === user.password) {
-        console.log('ok')
-      }
-    });
+
   }
 
   return (

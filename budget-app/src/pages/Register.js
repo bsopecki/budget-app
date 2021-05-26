@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Button, Form, Grid, Header, Segment, Message } from 'semantic-ui-react'
-import { validation } from '../registerFormValidation'
+import { registerValidation } from '../validation'
 
 const Register = ({ onAdd }) => {
 
@@ -19,7 +19,7 @@ const Register = ({ onAdd }) => {
 
     const registerMemberHandler = (e) => {
         e.preventDefault()
-        setErrors(validation(userData))
+        setErrors(registerValidation(userData))
         setValidData(true)
     }
 
