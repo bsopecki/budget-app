@@ -9,6 +9,7 @@ const Register = ({ onAdd }) => {
         name: '',
         email: '',
         password: '',
+        confirmedPassword: ''
     })
 
     const [errors, setErrors] = useState({})
@@ -21,7 +22,7 @@ const Register = ({ onAdd }) => {
             onAdd({ name: userData.name, email: userData.email, password: userData.password })
             clearForm(e)
             setErrors({})
-            history.push('/login')
+            history.push('/')
         } else {
             setErrors(registerValidation(userData))
         }
@@ -31,6 +32,7 @@ const Register = ({ onAdd }) => {
             name: '',
             email: '',
             password: '',
+            confirmedPassword: ''
         })
     }
 
@@ -67,6 +69,15 @@ const Register = ({ onAdd }) => {
                             type='password'
                             value={userData.password}
                             onChange={(e) => setUserData({ ...userData, password: e.target.value })}
+                            error={errors.bool}
+                        />
+                        {errors.confirmedPassword ? <Message>{errors.confirmedPassword}</Message> : ''}
+                        <Form.Input
+                            fluid
+                            placeholder='Confirm Password'
+                            type='password'
+                            value={userData.confirmedPassword}
+                            onChange={(e) => setUserData({ ...userData, confirmedPassword: e.target.value })}
                             error={errors.bool}
                         />
                         <Button color='teal' fluid size='large'>

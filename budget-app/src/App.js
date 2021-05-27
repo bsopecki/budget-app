@@ -5,30 +5,26 @@ import Login from './pages/Login'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 
+
 const App = () => {
-  const [user, setUser] = useState([])
-  const [loggedUser, setLoggedUser] = useState(user)
-  console.log(user)
+  const [user, setUser] = useState([
+    { id: 1, name: 'John', email: 'example@example.com', password: 'example' }
+  ])
+
 
   const setNewUser = (newUser) => {
     const setedUser = { ...newUser }
     setUser([...user, setedUser])
-    console.log(setedUser)
   }
-
-  const checkUser = (user) => {
-    const userHandler = { ...user }
-    setLoggedUser({ ...loggedUser, userHandler })
-
-  }
+  console.log(user)
 
   return (
     <div>
       <Router>
         <Switch>
-          <Route path='/' exact component={() => <Register onAdd={setNewUser} />} />
+          <Route path='/register' exact component={() => <Register onAdd={setNewUser} />} />
           <Route path='/budget' component={() => <BudgetPage />} />
-          <Route path='/login' component={() => <Login loginHandler={checkUser} />} />
+          <Route path='/' component={() => <Login users={user} />} />
         </Switch>
       </Router>
     </div>
