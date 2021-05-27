@@ -95,7 +95,7 @@ export const loginValidation = (user, registratedUser) => {
     } else if (!/\S+@\S+\.\S+/.test(user.email)) {
         errors.bool = true;
         errors.email = 'Email is invalid'
-    } else if (user.email !== registratedUser.email && user.password !== registratedUser.password) {
+    } else if (user.email !== registratedUser.email || user.password !== registratedUser.password) {
         errors.bool = true;
         errors.email = 'Invalid email or password'
     }

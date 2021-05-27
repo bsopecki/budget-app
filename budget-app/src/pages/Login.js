@@ -13,21 +13,26 @@ const LoginForm = ({ users }) => {
 
     const onSubmit = (e) => {
         e.preventDefault()
-        const [loggedUser] = users.filter((user) => {
+        const loggedUser = users.map((user) => {
             if (user.email === loginData.email && user.password === loginData.password) {
-                console.log('userEmail: ', user.mail)
-                console.log('loggedUser: ', loginData.email)
                 return user
+            } else {
+                return {
+                    email: '',
+                    password: ''
+                }
             }
-            else { return user }
+
         })
-        if (Object.keys(loginValidation(loginData, loggedUser)).length === 0) {
+
+        const filtered = loggedUser.filter((elem) => elem.email !== '' && elem.password !== '')
+
+        if (loggedUser && filtered.length > 0) {
             dataCleaner(e)
             setErrors({})
             accessHandler()
         } else {
             setErrors(loginValidation(loginData, loggedUser))
-            console.log(loggedUser)
         }
 
     }

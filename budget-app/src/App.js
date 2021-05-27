@@ -8,7 +8,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 const App = () => {
   const [user, setUser] = useState([
-    { id: 1, name: 'John', email: 'example@example.com', password: 'example' }
+    { name: 'John', email: 'example@example.com', password: 'example' }
   ])
 
 
