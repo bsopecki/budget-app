@@ -70,10 +70,14 @@ export const financeRecordValdation = (values) => {
     if (isNaN(values.amount)) {
         errors.bool = true;
         errors.amount = 'Numeric value required'
-    } else if (values.amount < 0) {
+    } else if (values.amount <= 0) {
         errors.bool = true;
         errors.amount = 'Amount must be a positive number'
+    } else if (values.amount > 10000000) {
+        errors.bool = true
+        errors.amount = 'Amount is to high'
     } else if (!/^\d+(?:\.\d{1,2})?$/.test(values.amount)) {
+        console.log(values.amount)
         errors.bool = true
         errors.amount = 'Numbers with at most 2 decimal places are allowed'
     }
