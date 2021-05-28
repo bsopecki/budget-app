@@ -87,7 +87,7 @@ function MainForm({ onAdd }) {
                 <option value='red'>Expense</option>
             </select>
             <Button.Group>
-                <Button color='red' onClick={cancelHandler}>Canel</Button>
+                <Button color='red' onClick={cancelHandler}>Cancel</Button>
                 <Button.Or />
                 <Button color='green'>Ok</Button>
             </Button.Group>

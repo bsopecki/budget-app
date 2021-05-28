@@ -42,15 +42,15 @@ export const registerValidation = (values) => {
 export const financeRecordValdation = (values) => {
     let errors = {}
 
-    if (values.descripton === ' ') {
+    if (values.description === ' ') {
         errors.bool = true;
-        errors.descripton = 'Description is required'
+        errors.description = 'Description is required'
     } else if (!/^[A-Za-z]+$/.test(values.descripton)) {
         errors.bool = true;
-        errors.descripton = 'Only letters are allowed'
-    } else if (Object.keys(values.descripton).length < 6) {
+        errors.description = 'Only letters are allowed'
+    } else if (Object.keys(values.description).length < 4) {
         errors.bool = true;
-        errors.descripton = 'Description is too short.Min lenght is 6'
+        errors.description = 'Description is too short.Min lenght is 6'
     }
 
     if (!values.category) {
