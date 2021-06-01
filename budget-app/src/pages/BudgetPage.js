@@ -22,7 +22,6 @@ const BudgetPage = () => {
         }
     }
 
-
     const mainBalance = amounts('green') - amounts('red')
 
     //Add record

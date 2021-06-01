@@ -1,9 +1,16 @@
 import { Segment, Grid, GridRow, Icon } from 'semantic-ui-react'
 import NoRecords from './NoRecords'
+import Dropdown from './Dropdown'
+
 
 const HistoryRecord = ({ records, onDelete }) => {
 
+    const filterRecords = (param) => {
+        const filteredData = records.filter(({ category }) => category === param)
+        console.log(filteredData)
+    }
     return (<Segment>
+        <Dropdown filterData={filterRecords} records={records} />
         {records.length === 0 ? (<NoRecords />) : (
             records.map(record =>
                 <Segment key={record.id} color={record.status} >

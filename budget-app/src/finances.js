@@ -36,7 +36,7 @@ export const finances = [{
 {
     id: 6,
     amount: 95,
-    category: 'bills',
+    category: 'loans',
     description: 'loan installment',
     status: 'red'
 },
@@ -50,7 +50,7 @@ export const finances = [{
 {
     id: 8,
     amount: 40,
-    category: 'clothes expenses',
+    category: 'clothes and shoes',
     description: 'new shoes',
     status: 'red'
 },

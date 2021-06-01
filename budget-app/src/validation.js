@@ -45,7 +45,7 @@ export const financeRecordValdation = (values) => {
     if (values.description === ' ') {
         errors.bool = true;
         errors.description = 'Description is required'
-    } else if (!/^[A-Za-z]+$/.test(values.descripton)) {
+    } else if (!/^[A-Za-z]+$/.test(values.description)) {
         errors.bool = true;
         errors.description = 'Only letters are allowed'
     } else if (Object.keys(values.description).length < 4) {
